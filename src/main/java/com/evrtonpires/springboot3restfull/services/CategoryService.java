@@ -29,6 +29,11 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
+    public List<Category> saveAll(List<Category> categories) {
+
+        return categoryRepository.saveAll(categories);
+    }
+
 
     public Object update(UUID id, Category category) {
         Optional<Category> categoryO = categoryRepository.findById(id);

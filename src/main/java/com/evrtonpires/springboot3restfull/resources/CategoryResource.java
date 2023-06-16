@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,12 +50,25 @@ public class CategoryResource {
 
     }
 
-    @PostMapping("/categories")
-    public ResponseEntity<Category> save(@RequestBody @Valid CategoryRecordDto categoryRecordDto) {
-        var category = new Category();
-        BeanUtils.copyProperties(categoryRecordDto, category);
+//    @PostMapping("/categories")
+//    public ResponseEntity<Category> save(@RequestBody @Valid CategoryRecordDto categoryRecordDto) {
+//        var category = new Category();
+//        BeanUtils.copyProperties(categoryRecordDto, category);
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.save(category));
+//    }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.save(category));
+    @PostMapping("/categories")
+    public ResponseEntity<List<Category>> saveAll(@RequestBody @Valid List<CategoryRecordDto> categoryRecordDtos) {
+        List<Category> categories = new ArrayList<>();
+        for (CategoryRecordDto categoryR : categoryRecordDtos) {
+            var category = new Category();
+            BeanUtils.copyProperties(categoryR, category);
+            categories.add(category);
+        }
+
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.saveAll(categories));
     }
 
 
