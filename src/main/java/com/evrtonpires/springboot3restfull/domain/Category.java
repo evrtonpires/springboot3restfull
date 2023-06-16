@@ -1,6 +1,7 @@
 package com.evrtonpires.springboot3restfull.domain;
 
 import jakarta.persistence.*;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -8,16 +9,14 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "TB_CATEGORY")
-public class Category implements Serializable {
+public class Category extends RepresentationModel<Category> implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
 
-    public Category(UUID id, String name) {
-        this.id = id;
-        this.name = name;
+    public Category() {
     }
 
     public UUID getId() {
