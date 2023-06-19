@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.UUID;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+@Validated
 @RestController
 public class CategoryResource {
 
@@ -59,7 +61,7 @@ public class CategoryResource {
 //    }
 
     @PostMapping("/categories")
-    public ResponseEntity<List<Category>> saveAll(@RequestBody @Valid List<CategoryRecordDto> categoryRecordDtos) {
+    public ResponseEntity<List<Category>> saveAll(@RequestBody List<@Valid CategoryRecordDto> categoryRecordDtos) {
         List<Category> categories = new ArrayList<>();
         for (CategoryRecordDto categoryR : categoryRecordDtos) {
             var category = new Category();
@@ -73,7 +75,7 @@ public class CategoryResource {
 
 
     @PutMapping("/categories/{id}")
-    public ResponseEntity<Object> updateProduct(@PathVariable(value = "id") UUID id, @RequestBody @Valid CategoryRecordDto categoryRecordDto) {
+    public ResponseEntity<Object> updateProduct(@PathVariable(value = "id") UUID id, @Valid @RequestBody CategoryRecordDto categoryRecordDto) {
         Category category = categoryService.getById(id);
         if (category == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
