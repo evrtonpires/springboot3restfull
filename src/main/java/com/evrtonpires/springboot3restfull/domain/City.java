@@ -20,7 +20,7 @@ public class City extends RepresentationModel<City> implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
-    @JsonManagedReference
+
     @ManyToOne
     @JoinColumn(name = "state_id")
     private State state;
