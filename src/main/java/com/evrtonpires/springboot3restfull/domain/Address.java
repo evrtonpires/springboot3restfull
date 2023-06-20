@@ -1,6 +1,8 @@
 package com.evrtonpires.springboot3restfull.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -9,7 +11,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "TB_ADDRESS")
-public class Address implements Serializable {
+public class Address  extends RepresentationModel<Address> implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
@@ -23,6 +25,7 @@ public class Address implements Serializable {
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;

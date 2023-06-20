@@ -1,5 +1,6 @@
 package com.evrtonpires.springboot3restfull.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.springframework.hateoas.RepresentationModel;
@@ -20,7 +21,7 @@ public class State extends RepresentationModel<State> implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "state")
     private List<City> cities = new ArrayList<>();
 

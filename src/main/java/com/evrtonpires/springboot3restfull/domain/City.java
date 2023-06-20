@@ -23,6 +23,7 @@ public class City extends RepresentationModel<City> implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "state_id")
+    @JsonManagedReference
     private State state;
 
     public City() {

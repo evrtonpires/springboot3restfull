@@ -3,6 +3,7 @@ package com.evrtonpires.springboot3restfull.domain;
 import com.evrtonpires.springboot3restfull.enums.ClientType;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "TB_CLIENT")
-public class Client implements Serializable {
+public class Client extends RepresentationModel<Client> implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
@@ -21,6 +22,7 @@ public class Client implements Serializable {
     private String cpfOurCnpj;
 
     private Integer type;
+    @JsonManagedReference
     @OneToMany(mappedBy = "client")
     private List<Address> addresses = new ArrayList<>();
     @ElementCollection
