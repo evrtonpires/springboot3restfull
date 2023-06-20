@@ -63,11 +63,12 @@ public class Category extends RepresentationModel<Category> implements Serializa
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Category category)) return false;
-        return Objects.equals(id, category.id) && Objects.equals(name, category.name);
+        if (!super.equals(o)) return false;
+        return Objects.equals(id, category.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(super.hashCode(), id);
     }
 }
