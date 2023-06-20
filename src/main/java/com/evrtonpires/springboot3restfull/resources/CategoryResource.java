@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,10 +41,6 @@ public class CategoryResource {
     @GetMapping("/categories/{id}")
     public ResponseEntity<Object> getById(@PathVariable(value = "id") UUID id) {
         Category category = categoryService.getById(id);
-        if (category == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).
-                    body("Product not found.");
-        }
         category.add(linkTo(methodOn(CategoryResource.class).getAll()).withSelfRel());
         return ResponseEntity.status(HttpStatus.OK).
                 body(category);

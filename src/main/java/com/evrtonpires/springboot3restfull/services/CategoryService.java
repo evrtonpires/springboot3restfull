@@ -1,5 +1,6 @@
 package com.evrtonpires.springboot3restfull.services;
 
+import com.evrtonpires.springboot3restfull.services.exceptions.ObjectNotFoundException;
 import com.evrtonpires.springboot3restfull.domain.Category;
 import com.evrtonpires.springboot3restfull.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,8 @@ public class CategoryService {
 
     public Category getById(UUID id) {
         Optional<Category> categoryO = categoryRepository.findById(id);
-        return categoryO.orElse(null);
+        return categoryO.orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto não encontrado! ID: " + id + ", Tipo: "+ Category.class.getName()));
     }
 
     public Category save(Category category) {
