@@ -26,8 +26,11 @@ public class Client extends RepresentationModel<Client> implements Serializable 
     @OneToMany(mappedBy = "client")
     private List<Address> addresses = new ArrayList<>();
     @ElementCollection
-    @CollectionTable(name = "PHONE")
+    @CollectionTable(name = "TB_PHONE")
     private Set<String> phones = new HashSet<>();
+
+    @OneToMany(mappedBy = "client")
+    private List<Request> requests = new ArrayList<>();
 
     public Client() {
     }
@@ -42,6 +45,18 @@ public class Client extends RepresentationModel<Client> implements Serializable 
 
     public UUID getId() {
         return id;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
     }
 
     public void setId(UUID id) {

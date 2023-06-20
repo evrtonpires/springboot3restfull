@@ -23,7 +23,7 @@ public class Product extends RepresentationModel<Product> implements Serializabl
     private Double preco;
     @JsonBackReference
     @ManyToMany
-    @JoinTable(name = "PRODUCT_CATEGORY",
+    @JoinTable(name = "TB_PRODUCT_CATEGORY",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
