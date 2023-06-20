@@ -52,26 +52,26 @@ public class CategoryResource {
 
     }
 
-//    @PostMapping("/categories")
-//    public ResponseEntity<Category> save(@RequestBody @Valid CategoryRecordDto categoryRecordDto) {
-//        var category = new Category();
-//        BeanUtils.copyProperties(categoryRecordDto, category);
-//
-//        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.save(category));
-//    }
-
     @PostMapping("/categories")
-    public ResponseEntity<List<Category>> saveAll(@RequestBody List<@Valid CategoryRecordDto> categoryRecordDtos) {
-        List<Category> categories = new ArrayList<>();
-        for (CategoryRecordDto categoryR : categoryRecordDtos) {
-            var category = new Category();
-            BeanUtils.copyProperties(categoryR, category);
-            categories.add(category);
-        }
+    public ResponseEntity<Category> save(@RequestBody @Valid CategoryRecordDto categoryRecordDto) {
+        var category = new Category();
+        BeanUtils.copyProperties(categoryRecordDto, category);
 
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.saveAll(categories));
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.save(category));
     }
+
+//    @PostMapping("/categories")
+//    public ResponseEntity<List<Category>> saveAll(@RequestBody List<@Valid CategoryRecordDto> categoryRecordDtos) {
+//        List<Category> categories = new ArrayList<>();
+//        for (CategoryRecordDto categoryR : categoryRecordDtos) {
+//            var category = new Category();
+//            BeanUtils.copyProperties(categoryR, category);
+//            categories.add(category);
+//        }
+//
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.saveAll(categories));
+//    }
 
 
     @PutMapping("/categories/{id}")
